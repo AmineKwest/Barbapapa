@@ -95,7 +95,6 @@ class Attraction
     /**
      * @var Risk
      *
-     * @ORM\Column(name="risk_id", type="integer")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Risk", inversedBy="id" )
      * @ORM\JoinColumn(nullable=false)
      */
