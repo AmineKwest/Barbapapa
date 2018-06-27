@@ -38,14 +38,14 @@ class Attraction
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="opening_time", type="datetime")
+     * @ORM\Column(name="opening_time", type="time")
      */
     private $openingTime;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="closure_time", type="datetime")
+     * @ORM\Column(name="closure_time", type="time")
      */
     private $closureTime;
 
@@ -95,7 +95,6 @@ class Attraction
     /**
      * @var Risk
      *
-     * @ORM\Column(name="risk_id", type="integer")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Risk", inversedBy="id" )
      * @ORM\JoinColumn(nullable=false)
      */
