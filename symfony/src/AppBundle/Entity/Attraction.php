@@ -85,16 +85,15 @@ class Attraction
     private $victimeNumber;
 
     /**
-     * @var int
+     * @var Type
      *
-     * @ORM\Column(name="type_id", type="integer")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Type", inversedBy="id" )
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
     /**
-     * @var int
+     * @var Risk
      *
      * @ORM\Column(name="risk_id", type="integer")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Risk", inversedBy="id" )
@@ -330,51 +329,35 @@ class Attraction
     }
 
     /**
-     * Set typeId
-     *
-     * @param integer $typeId
-     *
-     * @return Attraction
+     * @return Type
      */
-    public function setTypeId($typeId)
+    public function getType()
     {
-        $this->typeId = $typeId;
-
-        return $this;
+        return $this->type;
     }
 
     /**
-     * Get typeId
-     *
-     * @return int
+     * @param Type $type
      */
-    public function getTypeId()
+    public function setType($type)
     {
-        return $this->typeId;
+        $this->type = $type;
     }
 
     /**
-     * Set riskId
-     *
-     * @param integer $riskId
-     *
-     * @return Attraction
+     * @return Risk
      */
-    public function setRiskId($riskId)
+    public function getRisk()
     {
-        $this->riskId = $riskId;
-
-        return $this;
+        return $this->risk;
     }
 
     /**
-     * Get riskId
-     *
-     * @return int
+     * @param Risk $risk
      */
-    public function getRiskId()
+    public function setRisk($risk)
     {
-        return $this->riskId;
+        $this->risk = $risk;
     }
 }
 
