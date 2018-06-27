@@ -35,13 +35,36 @@ class AttractionController extends Controller
             return new JsonResponse(['message' => 'Aucune attraction trouvée'], Response::HTTP_NOT_FOUND);
         }
 
-        $formatted = [];
         foreach ($attractions as $attraction) {
             $formatted[] = [
                 'id' => $attraction->getId(),
                 'name' => $attraction->getName()
             ];
         }
+
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/attractions/{id}", name="attraction_show")
+     * @Method({"GET"})
+     */
+    public function getPlaceAction(Request $request)
+    {
+
+        $attraction = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('AppBundle:Attraction')
+            ->find($request->get('id'));
+
+        if (empty($attraction)) {
+            return new JsonResponse(['message' => 'Aucune attraction trouvée'], Response::HTTP_NOT_FOUND);
+        }
+
+
+        $formatted = [
+            'id' => $attraction->getId(),
+            'name' => $attraction->getName()
+        ];
 
         return new JsonResponse($formatted);
     }
