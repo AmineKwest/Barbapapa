@@ -8,64 +8,49 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Attraction;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 class AttractionController extends Controller
 {
     /**
-     * @Route("/attractions", name="attractions_list")
-     * @Method({"GET"})
+     * @Rest\View()
+     * @Get("/attractions")
      */
-    public function getPlacesAction(Request $request)
+    public function getAttractionsAction(Request $request)
     {
 
         $attractions = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Attraction')
             ->findAll();
 
-        $attractions =[];
-
         if (empty($attractions)) {
             return new JsonResponse(['message' => 'Aucune attraction trouvée'], Response::HTTP_NOT_FOUND);
         }
 
-        foreach ($attractions as $attraction) {
-            $formatted[] = [
-                'id' => $attraction->getId(),
-                'name' => $attraction->getName()
-            ];
-        }
-
-        return new JsonResponse($formatted);
+        return $attractions;
     }
 
+
     /**
-     * @Route("/attractions/{id}", name="attraction_show")
-     * @Method({"GET"})
+     * @Rest\View()
+     * @Get("/attractions/{id}")
      */
-    public function getPlaceAction(Request $request)
+    public function getAttractionAction($id, Request $request)
     {
 
         $attraction = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Attraction')
-            ->find($request->get('id'));
+            ->find($id);
 
         if (empty($attraction)) {
             return new JsonResponse(['message' => 'Aucune attraction trouvée'], Response::HTTP_NOT_FOUND);
         }
 
-
-        $formatted = [
-            'id' => $attraction->getId(),
-            'name' => $attraction->getName()
-        ];
-
-        return new JsonResponse($formatted);
+        return $attraction;
     }
 }
