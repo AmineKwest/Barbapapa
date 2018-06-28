@@ -31,6 +31,13 @@ class Attraction
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
@@ -80,7 +87,7 @@ class Attraction
     /**
      * @var int
      *
-     * @ORM\Column(name="victims", type="integer", nullable=true)
+     * @ORM\Column(name="victims", type="integer")
      */
     private $victims;
 
@@ -99,6 +106,13 @@ class Attraction
      * @ORM\JoinColumn(nullable=false)
      */
     private $risk;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="coord", type="array")
+     */
+    private $coord;
 
 
     /**
@@ -361,7 +375,7 @@ class Attraction
 
     public function isCompliant($filters)
     {
-        $age = (isset($filters['age'])) 
+        $age = (isset($filters['age']))
             ? ($filters['age'][0] <= $this->age && $this->age <= $filters['age'][1])
             : true;
         $price = (isset($filters['price']))
@@ -384,6 +398,38 @@ class Attraction
             && $victims
             && $capacity
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getCoord()
+    {
+        return $this->coord;
+    }
+
+    /**
+     * @param array $coord
+     */
+    public function setCoord($coord)
+    {
+        $this->coord = $coord;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
 
