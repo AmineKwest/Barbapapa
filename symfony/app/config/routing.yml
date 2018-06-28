@@ -1,7 +1,3 @@
 app:
-    resource: '@AppBundle/Controller/DefaultController.php'
+    resource: '@AppBundle/Controller/*'
     type: annotation
-
-attractions:
-    type: rest
-    resource: AppBundle\Controller\AttractionController
