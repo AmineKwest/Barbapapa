@@ -52,14 +52,14 @@ class Attraction
     /**
      * @var int
      *
-     * @ORM\Column(name="age_minimum", type="integer")
+     * @ORM\Column(name="age", type="integer")
      */
     private $age;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="avg_waiting_time", type="integer")
+     * @ORM\Column(name="waitingtime", type="integer")
      */
     private $waitingtime;
 
@@ -80,7 +80,7 @@ class Attraction
     /**
      * @var int
      *
-     * @ORM\Column(name="victime_number", type="integer", nullable=true)
+     * @ORM\Column(name="victims", type="integer", nullable=true)
      */
     private $victims;
 
@@ -357,6 +357,33 @@ class Attraction
     public function setRisk($risk)
     {
         $this->risk = $risk;
+    }
+
+    public function isCompliant($filters)
+    {
+        $age = (isset($filters['age'])) 
+            ? ($filters['age'][0] <= $this->age && $this->age <= $filters['age'][1])
+            : true;
+        $price = (isset($filters['price']))
+            ? ($filters['price'][0] <= $this->price && $this->price <= $filters['price'][1])
+            : true;
+        $waitingtime = (isset($filters['waitingtime']))
+            ? ($filters['waitingtime'][0] <= $this->waitingtime && $this->waitingtime <= $filters['waitingtime'][1])
+            : true;
+        $victims = (isset($filters['victims']))
+            ? ($filters['victims'][0] <= $this->victims && $this->victims <= $filters['victims'][1])
+            : true;
+        $capacity = (isset($filters['capacity']))
+            ? ($filters['capacity'][0] <= $this->capacity && $this->capacity <= $filters['capacity'][1])
+            : true;
+
+        return (
+            $age
+            && $price
+            && $waitingtime
+            && $victims
+            && $capacity
+        );
     }
 }
 
