@@ -54,14 +54,14 @@ class Attraction
      *
      * @ORM\Column(name="age_minimum", type="integer")
      */
-    private $ageMinimum;
+    private $age;
 
     /**
      * @var int
      *
      * @ORM\Column(name="avg_waiting_time", type="integer")
      */
-    private $avgWaitingTime;
+    private $waitingtime;
 
     /**
      * @var int
@@ -82,7 +82,7 @@ class Attraction
      *
      * @ORM\Column(name="victime_number", type="integer", nullable=true)
      */
-    private $victimeNumber;
+    private $victims;
 
     /**
      * @var Type
@@ -210,13 +210,13 @@ class Attraction
     /**
      * Set ageMinimum
      *
-     * @param integer $ageMinimum
+     * @param integer $age
      *
      * @return Attraction
      */
-    public function setAgeMinimum($ageMinimum)
+    public function setAge($age)
     {
-        $this->ageMinimum = $ageMinimum;
+        $this->age = $age;
 
         return $this;
     }
@@ -226,21 +226,21 @@ class Attraction
      *
      * @return int
      */
-    public function getAgeMinimum()
+    public function getAge()
     {
-        return $this->ageMinimum;
+        return $this->age;
     }
 
     /**
      * Set avgWaitingTime
      *
-     * @param integer $avgWaitingTime
+     * @param integer $waitingtime
      *
      * @return Attraction
      */
-    public function setAvgWaitingTime($avgWaitingTime)
+    public function setWaitingtime($waitingtime)
     {
-        $this->avgWaitingTime = $avgWaitingTime;
+        $this->waitingtime = $waitingtime;
 
         return $this;
     }
@@ -250,9 +250,9 @@ class Attraction
      *
      * @return int
      */
-    public function getAvgWaitingTime()
+    public function getWaitingtime()
     {
-        return $this->avgWaitingTime;
+        return $this->waitingtime;
     }
 
     /**
@@ -304,27 +304,27 @@ class Attraction
     }
 
     /**
-     * Set victimeNumber
+     * Set victims
      *
-     * @param integer $victimeNumber
+     * @param integer $victims
      *
      * @return Attraction
      */
-    public function setVictimeNumber($victimeNumber)
+    public function setVictims($victims)
     {
-        $this->victimeNumber = $victimeNumber;
+        $this->victims = $victims;
 
         return $this;
     }
 
     /**
-     * Get victimeNumber
+     * Get victims
      *
      * @return int
      */
-    public function getVictimeNumber()
+    public function getVictims()
     {
-        return $this->victimeNumber;
+        return $this->victims;
     }
 
     /**
