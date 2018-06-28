@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Map, Marker, Popup, ImageOverlay} from 'react-leaflet';
 import L from 'leaflet';
-// import { ImageOverlay } from 'leaflet'
 import './MapPark.css';
 
 import greenBeard from './beard_green.png';
@@ -18,10 +17,10 @@ class MapPark extends Component {
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
     this.center = [40.74, -74.19];
-    this.croisiere = [40.753, -74.177];
+    this.croisiere = [40.76, -74.168];
+    this.auberge = [40.746, -74.195];
     this.lancer = [40.732, -74.159];
     this.barber = [40.728, -74.229];
-    this.auberge = [40.736, -74.195];
     this.ring = [40.753, -74.215];
 
     this.icon = (risk) => {
@@ -37,16 +36,26 @@ class MapPark extends Component {
             return greenBeard;
         }
       }
+
       return new L.icon({
-        iconUrl: choice(risk),
-        iconSize:     [40, 40], // size of the icon
-        iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
-        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+       iconUrl: choice(risk),
+       iconSize:     [40, 40], // size of the icon
+       iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+       popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
 
+  componentWillMount() {
+    fetch('http://192.168.2.51:8000/attractions')
+    .then((res) => {
+      console.log(res);
+      res.json()})
+    .then((json) => console.log(json));
+  }
+
   render() {
+    console.log(this.state.attractions);
     return (<div>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
