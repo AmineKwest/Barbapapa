@@ -15,7 +15,9 @@ class Filters extends React.Component {
       status: '',
       statusAge: '',
       statusTime: '',
-      statusPrice: '',
+			statusPrice: '',
+			statusVictims: '',
+			statusCapacity: ''
     };
  
   }
