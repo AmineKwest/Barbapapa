@@ -53,19 +53,19 @@ class MapPark extends Component {
           url={mapPic}
           bounds={this.bounds}>
           <Marker position={this.croisiere} icon={this.icon('tranquille')}>
-            <Popup><h1>Le drakkar s'amuse</h1><br/>Easily customizable.</Popup>
+            <Popup><h1>Le drakkar s'amuse</h1><p>Quand l'amour rencontre la barbe</p></Popup>
           </Marker>
           <Marker position={this.auberge} icon={this.icon('tranquille')}>
-            <Popup><h1>L'auberge du poney qui tousse</h1><br/>Easily customizable.</Popup>
+            <Popup><h1>L'auberge du poney qui tousse</h1><p>Le lieu de rencontre incontournable</p></Popup>
           </Marker>
           <Marker position={this.lancer} icon={this.icon('dangereux')} >
-            <Popup><h1>Le lancer de nains</h1><br/></Popup>
+            <Popup><h1>Le lancer de nains</h1><p>Testez votre puissance</p></Popup>
           </Marker>
           <Marker position={this.barber} icon={this.icon('mortel')} >
-            <Popup><h1>Sweeny's Barber</h1><br/></Popup>
+            <Popup><h1>Sweeny's Barber</h1><p>Prenez le trésor au risque de votre barbe !</p></Popup>
           </Marker>
           <Marker position={this.ring} icon={this.icon('mortel')} >
-            <Popup><h1>Le ring de l'évolution</h1><br/></Popup>
+            <Popup><h1>Le ring de l'évolution</h1><p>Retour de bâton pour Darwin</p></Popup>
           </Marker>
         </ImageOverlay>
       </Map>
