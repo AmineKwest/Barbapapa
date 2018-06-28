@@ -15,9 +15,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Attraction;
 
 class AttractionController extends Controller
 {
+
+
+
     /**
      * @Rest\View()
      * @Route("/attractions")
@@ -36,6 +40,7 @@ class AttractionController extends Controller
 
         return $attractions;
     }
+
 
     /**
      * @Rest\View()
