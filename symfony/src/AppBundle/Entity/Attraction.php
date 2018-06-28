@@ -31,6 +31,13 @@ class Attraction
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="photo", type="string", length=255)
      */
     private $photo;
