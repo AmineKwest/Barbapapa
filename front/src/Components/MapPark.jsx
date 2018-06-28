@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Map, Marker, Popup, ImageOverlay} from 'react-leaflet';
 import L from 'leaflet';
-// import { ImageOverlay } from 'leaflet'
 import './MapPark.css';
 
 import greenBeard from './beard_green.png';
@@ -34,6 +33,7 @@ class MapPark extends Component {
             return greenBeard;
         }
       }
+
       return new L.icon({
        iconUrl: choice(risk),
        iconSize:     [40, 40], // size of the icon
@@ -43,7 +43,16 @@ class MapPark extends Component {
     }
   }
 
+  componentWillMount() {
+    fetch('/attractions')
+    .then((res) => {
+      console.log(res);
+      res.json()})
+    .then((json) => console.log(json));
+  }
+
   render() {
+    console.log(this.state.attractions);
     return (<div>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
