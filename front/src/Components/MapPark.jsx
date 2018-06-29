@@ -27,11 +27,11 @@ class MapPark extends Component {
     this.icon = (risk) => {
       const choice = (p) => {
         switch (p) {
-          case 'tranquille':
+          case 'Tranquille':
             return greenBeard;
-          case 'dangereux':
+          case 'Dangereux':
             return orangeBeard;
-          case 'mortel':
+          case 'Mortel':
             return redBeard;
           default:
             return greenBeard;
@@ -46,6 +46,15 @@ class MapPark extends Component {
       })
     }
   }
+  dataRender = (data, i, key) => data ? data[i].key : 'error';
+
+  componentWillMount() {
+    fetch('/attractions')
+    .then(res => res.json())
+    .then(json => this.setState({attractions: json})
+    )
+  
+  };
 
   componentDidMount() {
     fetch('/attractions')
@@ -54,91 +63,28 @@ class MapPark extends Component {
   };
 
   render() {
+    
     return (<div>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
           url={mapPic}
           bounds={this.bounds}>
-          <Marker position={this.croisiere} icon={this.icon('tranquille')}>
-            <Popup>
-              <h1>{this.state.attractions[0] && this.state.attractions[0].name}</h1>
-              <img src={this.state.attractions[0] && this.state.attractions[0].photo} width='150px' height='auto' alt='drakkar'/>
-              <p>Quand l'amour rencontre la barbe</p>
-              <p>Prix : {this.state.attractions[0] && this.state.attractions[0].price} euros</p>
-              <p>Ouverture: {this.state.attractions[0] && this.state.attractions[0].openingTime}</p>
-              <p>Attente: {this.state.attractions[0] && this.state.attractions[0].waitingtime} mn</p>
-              <p>Age minimal: {this.state.attractions[0] && this.state.attractions[0].age}</p>
-              <p>Capacité: {this.state.attractions[0] && this.state.attractions[0].capacity} personnes</p>
-              <p>Risque du moment: {this.state.attractions[0] && this.state.attractions[0].risk.level}</p>
-              <p>Victimes actuelles: {this.state.attractions[0] && this.state.attractions[0].victims}</p>
+          {this.state.attractions.map( (data, i) => 
+          <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
+            <Popup key={i}> 
+              <h1>{data.name}</h1> 
+              <img src={data.photo} alt={data.name} width='150px' height='auto'/>
+              <p>{data.description}</p>
+              <p>Prix : {data.price} euros</p>
+              <p>Ouverture: {data.openingTime}</p>
+              <p>Attente: {data.waitingtime} mn</p>
+              <p>Age minimal: {data.age}</p>
+              <p>Capacité: {data.capacity} personnes</p>
+              <p>Risque du moment: {data.risk.level}</p>
+              <p>Victimes actuelles: {data.victims}</p>
             </Popup>
           </Marker>
-
-
-          <Marker position={this.auberge} icon={this.icon('tranquille')}>
-          <Popup>
-              <h1>{this.state.attractions[0] && this.state.attractions[4].name}</h1>
-              <img src={this.state.attractions[0] && this.state.attractions[4].photo} width='150px' height='auto' alt='drakkar'/>
-              <p>Le lieu de rencontre incontournable</p>
-              <p>Prix : {this.state.attractions[0] && this.state.attractions[4].price} euros</p>
-              <p>Ouverture: {this.state.attractions[0] && this.state.attractions[4].openingTime}</p>
-              <p>Attente: {this.state.attractions[0] && this.state.attractions[4].waitingtime} mn</p>
-              <p>Age minimal: {this.state.attractions[0] && this.state.attractions[4].age}</p>
-              <p>Capacité: {this.state.attractions[0] && this.state.attractions[4].capacity} personnes</p>
-              <p>Risque du moment: {this.state.attractions[0] && this.state.attractions[4].risk.level}</p>
-              <p>Victimes actuelles: {this.state.attractions[0] && this.state.attractions[4].victims}</p>
-            </Popup>
-          </Marker>
-
-
-          <Marker position={this.lancer} icon={this.icon('dangereux')} >
-          <Popup>
-              <h1>{this.state.attractions[0] && this.state.attractions[1].name}</h1>
-              <img src={this.state.attractions[0] && this.state.attractions[1].photo} width='150px' height='auto' alt='drakkar'/>
-              <p>Testez votre puissance</p>
-              <p>Prix : {this.state.attractions[0] && this.state.attractions[1].price} euros</p>
-              <p>Ouverture: {this.state.attractions[0] && this.state.attractions[1].openingTime}</p>
-              <p>Attente: {this.state.attractions[0] && this.state.attractions[1].waitingtime} mn</p>
-              <p>Age minimal: {this.state.attractions[0] && this.state.attractions[1].age}</p>
-              <p>Capacité: {this.state.attractions[0] && this.state.attractions[1].capacity} personnes</p>
-              <p>Risque du moment: {this.state.attractions[0] && this.state.attractions[1].risk.level}</p>
-              <p>Victimes actuelles: {this.state.attractions[0] && this.state.attractions[1].victims}</p>
-            </Popup>
-          </Marker>
-
-
-          <Marker position={this.barber} icon={this.icon('mortel')} >
-          <Popup>
-              <h1>{this.state.attractions[0] && this.state.attractions[3].name}</h1>
-              <img src={this.state.attractions[0] && this.state.attractions[3].photo} width='150px' height='auto' alt='drakkar'/>
-              <p>Prenez le trésor au risque de votre barbe !</p>
-              <p>Prix : {this.state.attractions[0] && this.state.attractions[3].price} euros</p>
-              <p>Ouverture: {this.state.attractions[0] && this.state.attractions[3].openingTime}</p>
-              <p>Attente: {this.state.attractions[0] && this.state.attractions[3].waitingtime} mn</p>
-              <p>Age minimal: {this.state.attractions[0] && this.state.attractions[3].age}</p>
-              <p>Capacité: {this.state.attractions[0] && this.state.attractions[3].capacity} personnes</p>
-              <p>Risque du moment: {this.state.attractions[0] && this.state.attractions[3].risk.level}</p>
-              <p>Victimes actuelles: {this.state.attractions[0] && this.state.attractions[3].victims}</p>
-            </Popup>
-          </Marker>
-
-
-          <Marker position={this.ring} icon={this.icon('mortel')} >
-          <Popup >
-              <h1>{this.state.attractions[0] && this.state.attractions[2].name}</h1>
-              <img src={this.state.attractions[0] && this.state.attractions[2].photo} width='150px' height='auto' alt='drakkar'/>
-              <p>Retour de bâton pour Darwin</p>
-              <p>Prix : {this.state.attractions[0] && this.state.attractions[2].price} euros</p>
-              <p>Ouverture: {this.state.attractions[0] && this.state.attractions[2].openingTime}</p>
-              <p>Attente: {this.state.attractions[0] && this.state.attractions[2].waitingtime} mn</p>
-              <p>Age minimal: {this.state.attractions[0] && this.state.attractions[2].age}</p>
-              <p>Capacité: {this.state.attractions[0] && this.state.attractions[2].capacity} personnes</p>
-              <p>Risque du moment: {this.state.attractions[0] && this.state.attractions[2].risk.level}</p>
-              <p>Victimes actuelles: {this.state.attractions[0] && this.state.attractions[2].victims}</p>
-            </Popup>
-          </Marker>
-
-
+          )}
         </ImageOverlay>
       </Map>
     </div>);
