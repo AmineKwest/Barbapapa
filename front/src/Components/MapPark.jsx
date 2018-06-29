@@ -15,6 +15,7 @@ class MapPark extends Component {
     this.state = {
       zoom: 15,
       attractions: [],
+      filters : null
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
     this.center = [40.72, -74.192];
@@ -33,28 +34,49 @@ class MapPark extends Component {
         }
       }
 
+      
+
       return new L.icon({
-       iconUrl: choice(risk),
-       iconSize:     [70, 70], // size of the icon
-       iconAnchor:   [35, 70], // point of the icon which will correspond to marker's location
-       popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
+        iconUrl: choice(risk),
+        iconSize:     [70, 70], // size of the icon
+        iconAnchor:   [35, 70], // point of the icon which will correspond to marker's location
+        popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
-
-  componentWillMount() {
-    fetch('/attractions')
+  filters = (filter) => {
+    this.setState({
+      filters : filter
+    })
+    const url = `/attractions` + (this.state.filters ? '/' + this.state.filters : '');
+    console.log(url);
+    fetch(url)
     .then(res => res.json())
-    .then(json => this.setState({attractions: json})
+    .then(json => {
+      console.log(json)
+      return this.setState({attractions: json})
+    }
     )
 
+  }
+  componentWillMount() {
+    
+    // fetch(`/attractions`)
+    //   .then(res => res.json())
+    //   .then(json => this.setState({ attractions: json })
+    //   )
+
+  };
+
+  componentDidUpdate() {
+   
   };
 
 
   render() {
 
     return (<div>
-      <Filters />
+      <Filters selectFilters={this.filters}/>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
           url={mapPic}
