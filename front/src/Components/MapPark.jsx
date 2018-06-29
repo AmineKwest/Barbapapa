@@ -14,24 +14,19 @@ class MapPark extends Component {
     super(props);
     this.state = {
       zoom: 15,
-      attractions: []
+      attractions: [],
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
-    this.center = [40.72, -74.192];
-    this.croisiere = [40.758, -74.168];
-    this.auberge = [40.7485, -74.192];
-    this.lancer = [40.725, -74.16];
-    this.barber = [40.728, -74.233];
-    this.ring = [40.7595, -74.227];
+    this.center = [40.74, -74.19];
 
     this.icon = (risk) => {
       const choice = (p) => {
         switch (p) {
-          case 'tranquille':
+          case 'Tranquille':
             return greenBeard;
-          case 'dangereux':
+          case 'Dangereux':
             return orangeBeard;
-          case 'mortel':
+          case 'Mortel':
             return redBeard;
           default:
             return greenBeard;
@@ -50,30 +45,41 @@ class MapPark extends Component {
   componentWillMount() {
     fetch('/attractions')
     .then(res => res.json())
-    .then(json => this.setState({attractions: json}))
+    .then(json => this.setState({attractions: json})
+    )
+
   };
 
+
   render() {
+
     return (<div>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
           url={mapPic}
           bounds={this.bounds}>
-          <Marker position={this.croisiere} icon={this.icon('tranquille')}>
-            <Popup><h1>{this.state.attractions[0] && this.state.attractions[0].name}</h1><p>Quand l'amour rencontre la barbe</p></Popup>
+          {this.state.attractions.map( (data, i) =>
+          <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
+            <Popup key={i}>
+            <h1 className='popupTitle'>{data.name}</h1>
+            <img className='popupImage' src={data.photo} alt={data.name} />
+            <p className='popupSubTitle'>{data.description}</p>
+              <div className='popupBody'>
+                <div>
+                  <p className='popupText'>Prix : {data.price} euros</p>
+                  <p className='popupText'>Ouverture: {data.openingTime}</p>
+                  <p className='popupText'>Attente: {data.waitingtime} mn</p>
+                  <p className='popupText'>Age minimal: {data.age}</p>
+                </div>
+                <div>
+                  <p className='popupText'>Capacité: {data.capacity} personnes</p>
+                  <p className='popupText'>Risque du moment: {data.risk.level}</p>
+                  <p className='popupText'>Victimes actuelles: {data.victims}</p>
+                </div>
+              </div>
+            </Popup>
           </Marker>
-          <Marker position={this.auberge} icon={this.icon('tranquille')}>
-            <Popup><h1>L'auberge du poney qui tousse</h1><p>Le lieu de rencontre incontournable</p></Popup>
-          </Marker>
-          <Marker position={this.lancer} icon={this.icon('dangereux')} >
-            <Popup><h1>Le lancer de nains</h1><p>Testez votre puissance</p></Popup>
-          </Marker>
-          <Marker position={this.barber} icon={this.icon('mortel')} >
-            <Popup><h1>Sweeny's Barber</h1><p>Prenez le trésor au risque de votre barbe !</p></Popup>
-          </Marker>
-          <Marker position={this.ring} icon={this.icon('mortel')} >
-            <Popup><h1>Le ring de l'évolution</h1><p>Retour de bâton pour Darwin</p></Popup>
-          </Marker>
+          )}
         </ImageOverlay>
       </Map>
     </div>);
