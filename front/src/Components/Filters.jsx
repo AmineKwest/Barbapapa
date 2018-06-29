@@ -18,6 +18,7 @@ class Filters extends React.Component {
 			statusPrice: '',
 			statusVictims: '',
 			statusCapacity: '',
+			statusDangerosity: '',
 			keyValues : [],
     };
 
@@ -30,14 +31,18 @@ class Filters extends React.Component {
     .then(json => this.setState({attractions: json}))
   };
 */
+
+	sendFilters (filters) {
+		this.props.selectFilters(filters)
+	}
 	handleChange = event => {
-		
 		let table = this.state.keyValues;
 		table.push('type=' + event.target.value)
     this.setState({
 			status: event.target.value,
 			keyValues :  table,
-    });
+		});
+		this.sendFilters(this.state.keyValues);
 
 	};
 
@@ -50,6 +55,7 @@ class Filters extends React.Component {
 			keyValues :  table,
     });
 
+		this.sendFilters(this.state.keyValues);
 	};
   
   handleChange3 = event => {
@@ -61,6 +67,7 @@ class Filters extends React.Component {
 			keyValues :  table,
     });
 
+		this.sendFilters(this.state.keyValues);
 	};
   handleChange4 = event => {
 		
@@ -71,6 +78,7 @@ class Filters extends React.Component {
 			keyValues : table,
     });
 
+		this.sendFilters(this.state.keyValues);
 	};
   
   handleChange5 = event => {
@@ -82,6 +90,7 @@ class Filters extends React.Component {
 			keyValues : table,
     });
 
+		this.sendFilters(this.state.keyValues);
 	};
 
   handleChange6 = event => {
@@ -93,7 +102,21 @@ class Filters extends React.Component {
 			keyValues : table,
     });
 
+		this.sendFilters(this.state.keyValues);
 	};
+
+	handleChange7 = event => {
+		
+		let table = this.state.keyValues;
+		table.push('capacity='+event.target.value)
+    this.setState({
+			statusDangerosity: event.target.value,
+			keyValues : table,
+    });
+
+		this.sendFilters(this.state.keyValues);
+	};
+
 
   render() {
     return (
@@ -179,10 +202,10 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='0-4'>inférieur à 5</MenuItem>
-						<MenuItem value='0-9'>inférieur à 10</MenuItem>
-						<MenuItem value='0-14'>inférieur à 15</MenuItem>
-						<MenuItem value='0-19'>inférieur à 20</MenuItem>
+						<MenuItem value='0-29'>inférieur à 30</MenuItem>
+						<MenuItem value='0-79'>inférieur à 80</MenuItem>
+						<MenuItem value='0-149'>inférieur à 150</MenuItem>
+						<MenuItem value='0-199'>inférieur à 200</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
@@ -204,6 +227,22 @@ class Filters extends React.Component {
 					</Select>
 				</FormControl>
 		</form>
+
+				<form className='form' autoComplete="off" 
+			style={{ display: 'inline', flexWrap: 'wrap' }} >
+
+					<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+						<InputLabel htmlFor="Status">Risque</InputLabel>
+						<Select value={this.state.statusCapacity} onChange={this.handleChange7} input={<Input name="status" id="Status"/>}>
+							<MenuItem value="">
+								<em>Aucun</em>
+							</MenuItem>
+							<MenuItem value='tranquille'>Tranquille</MenuItem>
+							<MenuItem value='dangereux'>Dangereux</MenuItem>
+							<MenuItem value='mortel'>Mortel</MenuItem>
+						</Select>
+					</FormControl>
+			</form>
 
       </div>
     );
