@@ -87,7 +87,7 @@ class Attraction
     /**
      * @var int
      *
-     * @ORM\Column(name="victims", type="integer", nullable=true)
+     * @ORM\Column(name="victims", type="integer")
      */
     private $victims;
 
@@ -107,6 +107,19 @@ class Attraction
      */
     private $risk;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="lat", type="float")
+     */
+    private $lat;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="long", type="float")
+     */
+    private $long;
 
     /**
      * Get id
@@ -391,6 +404,38 @@ class Attraction
             && $victims
             && $capacity
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param array $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * @param array $long
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
     }
 }
 
