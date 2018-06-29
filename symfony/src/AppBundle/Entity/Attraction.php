@@ -87,7 +87,7 @@ class Attraction
     /**
      * @var int
      *
-     * @ORM\Column(name="victims", type="integer", nullable=true)
+     * @ORM\Column(name="victims", type="integer")
      */
     private $victims;
 
@@ -107,6 +107,12 @@ class Attraction
      */
     private $risk;
 
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="coordinates", type="string")
+     */
+    private $coordinates;
 
     /**
      * Get id
@@ -391,6 +397,22 @@ class Attraction
             && $victims
             && $capacity
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function getCoordinates()
+    {
+        return $this->coordinates;
+    }
+
+    /**
+     * @param array $coordinates
+     */
+    public function setCoordinates($coordinates)
+    {
+        $this->coordinates = $coordinates;
     }
 }
 
