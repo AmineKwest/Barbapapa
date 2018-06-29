@@ -18,11 +18,6 @@ class MapPark extends Component {
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
     this.center = [40.74, -74.19];
-    this.croisiere = [40.76, -74.168];
-    this.auberge = [40.746, -74.195];
-    this.lancer = [40.732, -74.159];
-    this.barber = [40.728, -74.229];
-    this.ring = [40.753, -74.215];
 
     this.icon = (risk) => {
       const choice = (p) => {
@@ -64,6 +59,8 @@ class MapPark extends Component {
           url={mapPic}
           bounds={this.bounds}>
           {this.state.attractions.map( (data, i) => 
+          
+          
           <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
             <Popup key={i}> 
               <h1>{data.name}</h1> 
@@ -78,6 +75,8 @@ class MapPark extends Component {
               <p>Victimes actuelles: {data.victims}</p>
             </Popup>
           </Marker>
+
+
           )}
         </ImageOverlay>
       </Map>

@@ -22,19 +22,12 @@ class Filters extends React.Component {
  
   }
 
-	/*
-	componentWillMount() {
-    fetch('/attractions')
-    .then(res => res.json())
-    .then(json => this.setState({attractions: json}))
-  };
-*/
+
 	handleChange = event => {
 
     this.setState({
       status: event.target.value,
     });
-
 	};
 
   handleChange2 = event => {
@@ -80,7 +73,9 @@ class Filters extends React.Component {
 						<MenuItem  value='horreur'>Horreur</MenuItem>
 						<MenuItem value='famille'>Famille</MenuItem>
 						<MenuItem  value='sensation'>Sensations fortes</MenuItem>
-						<MenuItem value='viking'>Petit Viking</MenuItem>
+						<MenuItem value='spectacle'>Spectacle</MenuItem>
+						<MenuItem value='restaurant'>Restaurant</MenuItem>
+
 					</Select>
 				</FormControl>
 		</form>
