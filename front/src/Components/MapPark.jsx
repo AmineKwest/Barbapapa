@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Map, Marker, Popup, ImageOverlay} from 'react-leaflet';
 import L from 'leaflet';
 import './MapPark.css';
-
+import Filters from './Filters';
 import greenBeard from './beard_green.png';
 import orangeBeard from './beard_orange.png';
 import redBeard from './beard_red.png';
@@ -54,6 +54,7 @@ class MapPark extends Component {
   render() {
 
     return (<div>
+      <Filters />
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
           url={mapPic}
