@@ -39,26 +39,34 @@ class AttractionController extends Controller
 
     /**
      * @Rest\View()
-     * @Route("/attractions/{filter}", requirements={"filter"="[a-z\-\+\,\=]+\d+[a-z\-\+\,\=\d+]*"})
+     * @Route("/attractions/{filter}", requirements={"filter"="[a-z\-\+\,\=]+\d*[a-z\-\+\,\=\d*]*"})
      * @Method({"GET"})
      */
     public function getAttractionsByFilterAction($filter, Request $request)
     {
         $filters = $this->filtersTranslation($filter);
+        $initialFilters = [];
         if(isset($filters['type'])){
-            $filters['type'] = $this->get('doctrine.orm.entity_manager')
+            $initialFilters['type'] = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Type')
                 ->findByName($filters['type']);
+            unset($filters['type']);
         }
         if(isset($filters['risk'])){
-            $filters['risk'] = $this->get('doctrine.orm.entity_manager')
+            $initialFilters['risk'] = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Risk')
                 ->findByLevel($filters['risk']);
+            unset($filters['risk']);
+        }
+        foreach ($filters as $key => $value){
+            $filters[$key] = $this->parseRange($value[0]);
         }
 
         $attractions = $this->get('doctrine.orm.entity_manager')
             ->getRepository('AppBundle:Attraction')
-            ->findBy($filters);
+            ->findBy($initialFilters);
+
+        $attractions = $this->filterAttractions($attractions, $filters);
 
         if (empty($attractions)) {
             return new JsonResponse(['message' => 'Aucune attraction trouvée'], Response::HTTP_NOT_FOUND);
@@ -76,6 +84,21 @@ class AttractionController extends Controller
             $result[$currentFilter[0]] = explode(",",$currentFilter[1]);
         }
         return $result;
+    }
+
+    private function parseRange($range)
+    {
+        return explode('-',$range);
+    }
+
+    private function filterAttractions($attractions, $filters)
+    {
+        foreach ($attractions as $key => $attraction){
+            if (!$attraction->isCompliant($filters)){
+                unset($attractions[$key]);
+            };
+        }
+        return $attractions;
     }
 
 

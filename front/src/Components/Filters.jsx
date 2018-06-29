@@ -21,23 +21,18 @@ class Filters extends React.Component {
     };
  
   }
- 
-	handleChange = event => {
-    /*let displayed = this.state.display;
-    event.target.value == 'horreur' ? 
-    displayed = true : 
-    displayed = false;
-    
-    let displayed2 = this.state.display2;
-    event.target.value == 'famille' ? 
-    displayed2 = true : 
-    displayed2 = false;*/
 
+	/*
+	componentWillMount() {
+    fetch('/attractions')
+    .then(res => res.json())
+    .then(json => this.setState({attractions: json}))
+  };
+*/
+	handleChange = event => {
 
     this.setState({
       status: event.target.value,
-     /* display: displayed,
-      display2: displayed2,*/
     });
 
 	};
