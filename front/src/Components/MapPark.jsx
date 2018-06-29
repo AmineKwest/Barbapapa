@@ -18,11 +18,6 @@ class MapPark extends Component {
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
     this.center = [40.74, -74.19];
-    this.croisiere = [40.76, -74.168];
-    this.auberge = [40.746, -74.195];
-    this.lancer = [40.732, -74.159];
-    this.barber = [40.728, -74.229];
-    this.ring = [40.753, -74.215];
 
     this.icon = (risk) => {
       const choice = (p) => {
@@ -39,10 +34,10 @@ class MapPark extends Component {
       }
 
       return new L.icon({
-       iconUrl: choice(risk),
-       iconSize:     [40, 40], // size of the icon
-       iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
-       popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+        iconUrl: choice(risk),
+        iconSize:     [40, 40], // size of the icon
+        iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
@@ -66,16 +61,22 @@ class MapPark extends Component {
           {this.state.attractions.map( (data, i) => 
           <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
             <Popup key={i}> 
-              <h1>{data.name}</h1> 
-              <img src={data.photo} alt={data.name} width='150px' height='auto'/>
-              <p>{data.description}</p>
-              <p>Prix : {data.price} euros</p>
-              <p>Ouverture: {data.openingTime}</p>
-              <p>Attente: {data.waitingtime} mn</p>
-              <p>Age minimal: {data.age}</p>
-              <p>Capacité: {data.capacity} personnes</p>
-              <p>Risque du moment: {data.risk.level}</p>
-              <p>Victimes actuelles: {data.victims}</p>
+            <h1 className='popupTitle'>{data.name}</h1> 
+            <img className='popupImage' src={data.photo} alt={data.name} />
+            <p className='popupSubTitle'>{data.description}</p>
+              <div className='popupBody'>                
+                <div>                
+                  <p className='popupText'>Prix : {data.price} euros</p>
+                  <p className='popupText'>Ouverture: {data.openingTime}</p>
+                  <p className='popupText'>Attente: {data.waitingtime} mn</p>
+                  <p className='popupText'>Age minimal: {data.age}</p>
+                </div>
+                <div>
+                  <p className='popupText'>Capacité: {data.capacity} personnes</p>
+                  <p className='popupText'>Risque du moment: {data.risk.level}</p>
+                  <p className='popupText'>Victimes actuelles: {data.victims}</p>
+                </div>
+              </div>
             </Popup>
           </Marker>
           )}
