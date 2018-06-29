@@ -17,7 +17,7 @@ class MapPark extends Component {
       attractions: [],
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
-    this.center = [40.74, -74.19];
+    this.center = [40.72, -74.192];
 
     this.icon = (risk) => {
       const choice = (p) => {
