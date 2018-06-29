@@ -14,7 +14,7 @@ class MapPark extends Component {
     super(props);
     this.state = {
       zoom: 14,
-      attractions: []
+      attractions: [],
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
     this.center = [40.74, -74.19];
@@ -34,10 +34,10 @@ class MapPark extends Component {
       }
 
       return new L.icon({
-        iconUrl: choice(risk),
-        iconSize:     [40, 40], // size of the icon
-        iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
-        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+       iconUrl: choice(risk),
+       iconSize:     [40, 40], // size of the icon
+       iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+       popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
@@ -48,6 +48,12 @@ class MapPark extends Component {
     .then(json => this.setState({attractions: json})
     )
   
+  };
+
+  componentDidMount() {
+    fetch('/attractions')
+    .then(res => res.json())
+    .then(json => this.setState({attractions: json}))
   };
 
   render() {
