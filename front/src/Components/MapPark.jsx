@@ -13,15 +13,16 @@ class MapPark extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zoom: 14
+      zoom: 15,
+      attractions: []
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
-    this.center = [40.74, -74.19];
-    this.croisiere = [40.76, -74.168];
-    this.auberge = [40.746, -74.195];
-    this.lancer = [40.732, -74.159];
-    this.barber = [40.728, -74.229];
-    this.ring = [40.753, -74.215];
+    this.center = [40.72, -74.192];
+    this.croisiere = [40.758, -74.168];
+    this.auberge = [40.7485, -74.192];
+    this.lancer = [40.725, -74.16];
+    this.barber = [40.728, -74.233];
+    this.ring = [40.7595, -74.227];
 
     this.icon = (risk) => {
       const choice = (p) => {
@@ -39,9 +40,9 @@ class MapPark extends Component {
 
       return new L.icon({
        iconUrl: choice(risk),
-       iconSize:     [40, 40], // size of the icon
-       iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
-       popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+       iconSize:     [70, 70], // size of the icon
+       iconAnchor:   [35, 70], // point of the icon which will correspond to marker's location
+       popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
@@ -59,7 +60,7 @@ class MapPark extends Component {
           url={mapPic}
           bounds={this.bounds}>
           <Marker position={this.croisiere} icon={this.icon('tranquille')}>
-            <Popup><h1>Le drakkar s'amuse</h1><p>Quand l'amour rencontre la barbe</p></Popup>
+            <Popup><h1>{this.state.attractions[0] && this.state.attractions[0].name}</h1><p>Quand l'amour rencontre la barbe</p></Popup>
           </Marker>
           <Marker position={this.auberge} icon={this.icon('tranquille')}>
             <Popup><h1>L'auberge du poney qui tousse</h1><p>Le lieu de rencontre incontournable</p></Popup>
