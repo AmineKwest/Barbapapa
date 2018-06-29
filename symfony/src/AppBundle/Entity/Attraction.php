@@ -110,9 +110,16 @@ class Attraction
     /**
      * @var array
      *
-     * @ORM\Column(name="coordinates", type="string")
+     * @ORM\Column(name="lat", type="float")
      */
-    private $coordinates;
+    private $lat;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="long", type="float")
+     */
+    private $long;
 
     /**
      * Get id
@@ -402,17 +409,33 @@ class Attraction
     /**
      * @return array
      */
-    public function getCoordinates()
+    public function getLat()
     {
-        return $this->coordinates;
+        return $this->lat;
     }
 
     /**
-     * @param array $coordinates
+     * @param array $lat
      */
-    public function setCoordinates($coordinates)
+    public function setLat($lat)
     {
-        $this->coordinates = $coordinates;
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLong()
+    {
+        return $this->long;
+    }
+
+    /**
+     * @param array $long
+     */
+    public function setLong($long)
+    {
+        $this->long = $long;
     }
 }
 
