@@ -10,51 +10,83 @@ import Select from '@material-ui/core/Select';
 class Filters extends React.Component {
   constructor() {
     super();
- 
+
     this.state = {
       status: '',
       statusAge: '',
       statusTime: '',
 			statusPrice: '',
 			statusVictims: '',
-			statusCapacity: ''
+			statusCapacity: '',
+			keyValues : [],
     };
- 
+
   }
 
 
 	handleChange = event => {
-
+		
+		let table = this.state.keyValues;
+		table.push('type=' + event.target.value)
     this.setState({
-      status: event.target.value,
+			status: event.target.value,
+			keyValues :  table,
     });
 	};
 
   handleChange2 = event => {
-
-    this.setState({statusAge: event.target.value
+		
+		let table = this.state.keyValues;
+		table.push('age=' + event.target.value)
+    this.setState({
+			statusAge: event.target.value,
+			keyValues :  table,
     });
-  };
+
+	};
   
   handleChange3 = event => {
-    this.setState({statusTime: event.target.value
+		
+		let table = this.state.keyValues;
+		table.push('waitingtime=' +event.target.value)
+    this.setState({
+			statusTime: event.target.value,
+			keyValues :  table,
     });
-  };
-  
+
+	};
   handleChange4 = event => {
-    this.setState({statusPrice: event.target.value
+		
+		let table = this.state.keyValues;
+		table.push('price=' + event.target.value)
+    this.setState({
+			statusPrice: event.target.value,
+			keyValues : table,
     });
-  };
+
+	};
   
   handleChange5 = event => {
-    this.setState({statusVictims: event.target.value
+		
+		let table = this.state.keyValues;
+		table.push('victims=' +event.target.value)
+    this.setState({
+			statusVictims: event.target.value,
+			keyValues : table,
     });
+
 	};
 
   handleChange6 = event => {
-    this.setState({statusCapacity: event.target.value
+		
+		let table = this.state.keyValues;
+		table.push('capacity='+event.target.value)
+    this.setState({
+			statusCapacity: event.target.value,
+			keyValues : table,
     });
-    };
+
+	};
 
   render() {
     return (
@@ -72,16 +104,15 @@ class Filters extends React.Component {
 						</MenuItem>
 						<MenuItem  value='horreur'>Horreur</MenuItem>
 						<MenuItem value='famille'>Famille</MenuItem>
-						<MenuItem  value='sensation'>Sensations fortes</MenuItem>
-						<MenuItem value='spectacle'>Spectacle</MenuItem>
+						<MenuItem  value='spectacle'>Spéctacle</MenuItem>
 						<MenuItem value='restaurant'>Restaurant</MenuItem>
-
+						<MenuItem value='sensation-fortes'>Sensations Fortes</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
 
         <form className='form' autoComplete="off" 
-    style={{ display: 'inline', flexWrap: 'wrap' }} >
+    		style={{ display: 'inline', flexWrap: 'wrap' }} >
 
 				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Ages</InputLabel>
@@ -89,10 +120,10 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='10 ans'>inférieur à 10 ans</MenuItem>
-						<MenuItem value='15 ans'>entre 10 et 15 ans</MenuItem>
-						<MenuItem value='18 ans'>entre 15 et 18 ans</MenuItem>
-						<MenuItem value='adultes'>Adultes</MenuItem>
+						<MenuItem value='0-99'>Tout public</MenuItem>
+						<MenuItem value='10-99'>Interdit aux moins de 10 ans</MenuItem>
+						<MenuItem value='16-99'>Interdit aux moins de 16 ans</MenuItem>
+						<MenuItem value='18-99'>Interdit aux moins de 18 ans</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
@@ -106,10 +137,10 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='5 mn'>inférieur à 5 mn</MenuItem>
-						<MenuItem value='10 mn'>inférieur à 10 mn</MenuItem>
-						<MenuItem value='15 mn'>inférieur à 15 mn</MenuItem>
-						<MenuItem value='20 mn'>inférieur à 20 mn</MenuItem>
+						<MenuItem value='0-4'>inférieur à 5 mn</MenuItem>
+						<MenuItem value='0-9'>inférieur à 10 mn</MenuItem>
+						<MenuItem value='0-14'>inférieur à 15 mn</MenuItem>
+						<MenuItem value='0-20'>inférieur à 20 mn</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
@@ -123,10 +154,10 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='5 euros'>inférieur à 5 euros</MenuItem>
-						<MenuItem value='10 euros'>inférieur à 10 euros</MenuItem>
-						<MenuItem value='15 euros'>inférieur à 15 euros</MenuItem>
-						<MenuItem value='20 euros'>inférieur à 20 euros</MenuItem>
+						<MenuItem value='0-4'>inférieur à 5 euros</MenuItem>
+						<MenuItem value='0-9'>inférieur à 10 euros</MenuItem>
+						<MenuItem value='0-14'>inférieur à 15 euros</MenuItem>
+						<MenuItem value='0-1000'>M'en branle ! J'suis blindé !</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
@@ -141,10 +172,10 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='5 victimes'>inférieur à 5</MenuItem>
-						<MenuItem value='10 victimes'>inférieur à 10</MenuItem>
-						<MenuItem value='15 victimes'>inférieur à 15</MenuItem>
-						<MenuItem value='20 victimes'>inférieur à 20</MenuItem>
+						<MenuItem value='0-4'>inférieur à 5</MenuItem>
+						<MenuItem value='0-9'>inférieur à 10</MenuItem>
+						<MenuItem value='0-14'>inférieur à 15</MenuItem>
+						<MenuItem value='0-19'>inférieur à 20</MenuItem>
 					</Select>
 				</FormControl>
 		</form>
@@ -158,10 +189,11 @@ class Filters extends React.Component {
 						<MenuItem value="">
 							<em>Aucun</em>
 						</MenuItem>
-						<MenuItem value='5 personnes'>5 personnes</MenuItem>
-						<MenuItem value='10 personnes'>10 personnes</MenuItem>
-						<MenuItem value='15 personnes'>15 personnes</MenuItem>
-						<MenuItem value='20 personnes'>20 personnes</MenuItem>
+						<MenuItem value='0-5'>5 personnes max</MenuItem>
+						<MenuItem value='0-10'>10 personnes max</MenuItem>
+						<MenuItem value='0-20'>20 personnes max</MenuItem>
+						<MenuItem value='0-50'>50 personnes max</MenuItem>
+						<MenuItem value='0-1000'>Au delà de 50 personnes</MenuItem>
 					</Select>
 				</FormControl>
 		</form>

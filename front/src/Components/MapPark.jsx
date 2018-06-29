@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Map, Marker, Popup, ImageOverlay} from 'react-leaflet';
 import L from 'leaflet';
 import './MapPark.css';
-
+import Filters from './Filters';
 import greenBeard from './beard_green.png';
 import orangeBeard from './beard_orange.png';
 import redBeard from './beard_red.png';
@@ -13,11 +13,11 @@ class MapPark extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zoom: 14,
+      zoom: 15,
       attractions: [],
     }
     this.bounds = [[40.71, -74.25], [40.77, -74.12544]];
-    this.center = [40.74, -74.19];
+    this.center = [40.72, -74.192];
 
     this.icon = (risk) => {
       const choice = (p) => {
@@ -34,10 +34,10 @@ class MapPark extends Component {
       }
 
       return new L.icon({
-        iconUrl: choice(risk),
-        iconSize:     [40, 40], // size of the icon
-        iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
-        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+       iconUrl: choice(risk),
+       iconSize:     [70, 70], // size of the icon
+       iconAnchor:   [35, 70], // point of the icon which will correspond to marker's location
+       popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
       })
     }
   }
@@ -47,27 +47,26 @@ class MapPark extends Component {
     .then(res => res.json())
     .then(json => this.setState({attractions: json})
     )
-  
+
   };
 
 
   render() {
-    
+
     return (<div>
+      <Filters />
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay
           url={mapPic}
           bounds={this.bounds}>
-          {this.state.attractions.map( (data, i) => 
-          
-          
+          {this.state.attractions.map( (data, i) =>
           <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
-            <Popup key={i}> 
-            <h1 className='popupTitle'>{data.name}</h1> 
+            <Popup key={i}>
+            <h1 className='popupTitle'>{data.name}</h1>
             <img className='popupImage' src={data.photo} alt={data.name} />
             <p className='popupSubTitle'>{data.description}</p>
-              <div className='popupBody'>                
-                <div>                
+              <div className='popupBody'>
+                <div>
                   <p className='popupText'>Prix : {data.price} euros</p>
                   <p className='popupText'>Ouverture: {data.openingTime}</p>
                   <p className='popupText'>Attente: {data.waitingtime} mn</p>
