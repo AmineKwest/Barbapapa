@@ -47,15 +47,12 @@ class MapPark extends Component {
   }
 
   componentWillMount() {
-    fetch('http://192.168.2.51:8000/attractions')
-    .then((res) => {
-      console.log(res);
-      res.json()})
-    .then((json) => console.log(json));
-  }
+    fetch('/attractions')
+    .then(res => res.json())
+    .then(json => this.setState({attractions: json}))
+  };
 
   render() {
-    console.log(this.state.attractions);
     return (<div>
       <Map center={this.center} zoom={this.state.zoom} minZoom={14} maxZoom={17} maxBounds={this.bounds} maxBoundsViscosity={0.9}>
         <ImageOverlay

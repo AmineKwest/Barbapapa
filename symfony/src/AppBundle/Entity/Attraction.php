@@ -108,14 +108,14 @@ class Attraction
     private $risk;
 
     /**
-     * @var array
+     * @var float
      *
      * @ORM\Column(name="lat", type="float")
      */
     private $lat;
 
     /**
-     * @var array
+     * @var float
      *
      * @ORM\Column(name="long", type="float")
      */
@@ -381,7 +381,7 @@ class Attraction
 
     public function isCompliant($filters)
     {
-        $age = (isset($filters['age'])) 
+        $age = (isset($filters['age']))
             ? ($filters['age'][0] <= $this->age && $this->age <= $filters['age'][1])
             : true;
         $price = (isset($filters['price']))
@@ -407,7 +407,7 @@ class Attraction
     }
 
     /**
-     * @return array
+     * @return float
      */
     public function getLat()
     {
@@ -415,7 +415,7 @@ class Attraction
     }
 
     /**
-     * @param array $lat
+     * @param float $lat
      */
     public function setLat($lat)
     {
@@ -423,7 +423,7 @@ class Attraction
     }
 
     /**
-     * @return array
+     * @return float
      */
     public function getLong()
     {
@@ -431,11 +431,27 @@ class Attraction
     }
 
     /**
-     * @param array $long
+     * @param float $long
      */
     public function setLong($long)
     {
         $this->long = $long;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
 
