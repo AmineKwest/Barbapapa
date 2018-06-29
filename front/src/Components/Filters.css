@@ -1,0 +1,10 @@
+.filters {
+  position: absolute;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.form > div > label {
+  color: black;
+}
