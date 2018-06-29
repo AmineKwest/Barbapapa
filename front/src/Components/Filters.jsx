@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import './Filters.css';
 
 
 class Filters extends React.Component {
@@ -36,6 +37,7 @@ class Filters extends React.Component {
 		this.props.selectFilters(filters)
 	}
 	handleChange = event => {
+
 		let table = this.state.keyValues;
 		table.push('type=' + event.target.value)
     this.setState({
@@ -47,7 +49,7 @@ class Filters extends React.Component {
 	};
 
   handleChange2 = event => {
-		
+
 		let table = this.state.keyValues;
 		table.push('age=' + event.target.value)
     this.setState({
@@ -57,9 +59,9 @@ class Filters extends React.Component {
 
 		this.sendFilters(this.state.keyValues);
 	};
-  
+
   handleChange3 = event => {
-		
+
 		let table = this.state.keyValues;
 		table.push('waitingtime=' +event.target.value)
     this.setState({
@@ -70,7 +72,7 @@ class Filters extends React.Component {
 		this.sendFilters(this.state.keyValues);
 	};
   handleChange4 = event => {
-		
+
 		let table = this.state.keyValues;
 		table.push('price=' + event.target.value)
     this.setState({
@@ -80,9 +82,9 @@ class Filters extends React.Component {
 
 		this.sendFilters(this.state.keyValues);
 	};
-  
+
   handleChange5 = event => {
-		
+
 		let table = this.state.keyValues;
 		table.push('victims=' +event.target.value)
     this.setState({
@@ -94,7 +96,7 @@ class Filters extends React.Component {
 	};
 
   handleChange6 = event => {
-		
+
 		let table = this.state.keyValues;
 		table.push('capacity='+event.target.value)
     this.setState({
@@ -120,13 +122,13 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='filters'>
 
 
-    <form className='form' autoComplete="off" 
+    <form className='form' autoComplete="off"
     style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b1' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Types</InputLabel>
 					<Select value={this.state.status} onChange={this.handleChange} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
@@ -141,10 +143,10 @@ class Filters extends React.Component {
 				</FormControl>
 		</form>
 
-        <form className='form' autoComplete="off" 
+        <form className='form' autoComplete="off"
     		style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b2' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Ages</InputLabel>
 					<Select value={this.state.statusAge} onChange={this.handleChange2} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
@@ -158,10 +160,10 @@ class Filters extends React.Component {
 				</FormControl>
 		</form>
 
-        <form className='form' autoComplete="off" 
+        <form className='form' autoComplete="off"
     style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b3' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Attente</InputLabel>
 					<Select value={this.state.statusTime} onChange={this.handleChange3} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
@@ -175,10 +177,10 @@ class Filters extends React.Component {
 				</FormControl>
 		</form>
 
-        <form className='form' autoComplete="off" 
+        <form className='form' autoComplete="off"
     style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b4' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Prix</InputLabel>
 					<Select value={this.state.statusPrice} onChange={this.handleChange4} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
@@ -193,10 +195,10 @@ class Filters extends React.Component {
 		</form>
 
 
-        <form className='form' autoComplete="off" 
+        <form className='form' autoComplete="off"
     style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b5' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Victimes</InputLabel>
 					<Select value={this.state.statusVictims} onChange={this.handleChange5} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
@@ -210,10 +212,10 @@ class Filters extends React.Component {
 				</FormControl>
 		</form>
 
-        <form className='form' autoComplete="off" 
+        <form className='form' autoComplete="off"
     style={{ display: 'inline', flexWrap: 'wrap' }} >
 
-				<FormControl className='formControl' style={{margin: '10px', minWidth: 120}}  >
+				<FormControl className='formControl b6' style={{margin: '10px', minWidth: 120}}  >
 					<InputLabel htmlFor="Status">Capacité</InputLabel>
 					<Select value={this.state.statusCapacity} onChange={this.handleChange6} input={<Input name="status" id="Status"/>}>
 						<MenuItem value="">
