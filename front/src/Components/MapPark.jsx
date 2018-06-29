@@ -46,7 +46,6 @@ class MapPark extends Component {
       })
     }
   }
-  dataRender = (data, i, key) => data ? data[i].key : 'error';
 
   componentWillMount() {
     fetch('/attractions')
@@ -56,11 +55,6 @@ class MapPark extends Component {
   
   };
 
-  componentDidMount() {
-    fetch('/attractions')
-    .then(res => res.json())
-    .then(json => this.setState({attractions: json}))
-  };
 
   render() {
     
