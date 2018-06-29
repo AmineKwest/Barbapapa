@@ -60,6 +60,8 @@ class MapPark extends Component {
           url={mapPic}
           bounds={this.bounds}>
           {this.state.attractions.map( (data, i) =>
+          
+          
           <Marker key={i} position={[data.lat, data.long]} icon={this.icon(data.risk.level)}>
             <Popup key={i}>
             <h1 className='popupTitle'>{data.name}</h1>

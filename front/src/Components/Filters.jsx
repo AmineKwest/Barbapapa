@@ -23,7 +23,6 @@ class Filters extends React.Component {
 
   }
 
-
 	handleChange = event => {
 		
 		let table = this.state.keyValues;
